@@ -6,6 +6,24 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  html {
+    background: var(--background);
+  }
+
+  body {
+    letter-spacing: -0.012em;
+    background-image:
+      radial-gradient(circle at 12% -8%, color-mix(in srgb, var(--accent) 10%, transparent) 0, transparent 28rem),
+      linear-gradient(var(--background), var(--background));
+  }
+
+  code,
+  pre,
+  kbd,
+  samp {
+    font-family: var(--font-code);
+  }
+
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
@@ -23,15 +41,15 @@
 }
 
 @utility max-w-app {
-  @apply max-w-3xl;
+  @apply max-w-6xl;
 }
 
 @utility app-layout {
-  @apply max-w-app mx-auto w-full px-4;
+  @apply max-w-app mx-auto w-full px-5 sm:px-8;
 }
 
 @utility active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+  @apply text-accent;
 }
 
 :target {
