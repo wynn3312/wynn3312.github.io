@@ -1,0 +1,50 @@
+---
+import Layout from "./Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+type Props = {
+  section: string;
+  sectionHref: string;
+  title: string;
+  description: string;
+  pubDatetime: Date;
+  modDatetime?: Date | null;
+  eyebrow?: string;
+  tags?: string[];
+  sourceName?: string;
+  sourceURL?: string;
+  repositoryURL?: string;
+  demoURL?: string;
+};
+
+const { section, sectionHref, title, description, pubDatetime, modDatetime, eyebrow, tags = [], sourceName, sourceURL, repositoryURL, demoURL } = Astro.props;
+const date = new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(modDatetime ?? pubDatetime);
+---
+
+<Layout title={title + " | " + section} {description}>
+  <Header />
+  <main id="main-content" class="app-layout">
+    <article class="mx-auto max-w-3xl py-12 sm:py-20">
+      <a href={sectionHref} class="text-accent text-sm font-bold">← {section}</a>
+      <header class="border-border mt-8 border-b pb-8">
+        {eyebrow && <p class="text-muted-foreground text-sm font-semibold tracking-[0.12em] uppercase">{eyebrow}</p>}
+        <h1 class="mt-3 text-4xl leading-tight font-bold tracking-[-0.04em] sm:text-5xl">{title}</h1>
+        <p class="text-muted-foreground mt-5 text-lg leading-8">{description}</p>
+        <div class="text-muted-foreground mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+          <time datetime={(modDatetime ?? pubDatetime).toISOString()}>{date}</time>
+          {sourceName && sourceURL && <a class="hover:text-accent underline underline-offset-4" href={sourceURL} target="_blank" rel="noreferrer">원문: {sourceName}</a>}
+          {repositoryURL && <a class="hover:text-accent underline underline-offset-4" href={repositoryURL} target="_blank" rel="noreferrer">Repository</a>}
+          {demoURL && <a class="hover:text-accent underline underline-offset-4" href={demoURL} target="_blank" rel="noreferrer">Live</a>}
+        </div>
+        {tags.length > 0 && (
+          <ul class="mt-5 flex flex-wrap gap-2">
+            {tags.map(tag => <li class="bg-surface-strong text-muted-foreground rounded-full px-3 py-1 text-xs font-medium">{tag}</li>)}
+          </ul>
+        )}
+      </header>
+      <div class="prose mt-10 max-w-none"><slot /></div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

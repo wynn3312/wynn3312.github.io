@@ -34,4 +34,49 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+const projects = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/projects" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDatetime: z.date(),
+    modDatetime: z.date().optional().nullable(),
+    status: z.enum(["completed", "in-progress", "paused"]).default("completed"),
+    role: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+    repositoryURL: z.url().optional(),
+    demoURL: z.url().optional(),
+  }),
+});
+
+const labs = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/lab" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    experiment: z.string(),
+    order: z.number().int().positive().default(1),
+    pubDatetime: z.date(),
+    modDatetime: z.date().optional().nullable(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const scraps = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/scraps" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDatetime: z.date(),
+    modDatetime: z.date().optional().nullable(),
+    sourceName: z.string().optional(),
+    sourceURL: z.url().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { posts, pages, projects, labs, scraps };

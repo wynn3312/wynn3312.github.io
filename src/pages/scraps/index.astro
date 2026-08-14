@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SectionIntro from "@/components/SectionIntro.astro";
+import CollectionCard from "@/components/CollectionCard.astro";
+
+const scraps = (await getCollection("scraps", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDatetime.valueOf() - a.data.pubDatetime.valueOf());
+const formatDate = (date: Date) => new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "short", day: "numeric" }).format(date);
+---
+
+<Layout title="Scraps | Wynn" description="기사와 기술 이슈를 읽고 요약과 의견을 기록합니다.">
+  <Header />
+  <main id="main-content" class="app-layout">
+    <SectionIntro eyebrow="Read, think, comment" title="Scraps" description="눈에 들어온 기사와 기술 이슈를 다시 읽을 수 있도록 요약하고, 그 시점의 생각과 질문을 덧붙입니다." />
+    <section class="py-10 sm:py-14">
+      {scraps.length > 0 ? (
+        <ul class="grid gap-5 sm:grid-cols-2">
+          {scraps.map(({ id, data }) => (
+            <li>
+              <CollectionCard href={`/scraps/${id}/`} title={data.title} description={data.description} eyebrow={data.sourceName ?? "Scrap"} meta={formatDate(data.pubDatetime)} tags={data.tags} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="border-border bg-surface rounded-2xl border p-8 sm:p-12">
+          <p class="text-accent text-sm font-bold">READING NOTES</p>
+          <h2 class="mt-3 text-2xl font-bold">읽고 생각한 내용을 모을 공간입니다.</h2>
+          <p class="text-muted-foreground mt-3 max-w-xl leading-7">기사의 핵심 내용, 인상적인 지점, 동의하거나 의문이 든 부분을 짧게 축적합니다.</p>
+        </div>
+      )}
+    </section>
+  </main>
+  <Footer />
+</Layout>

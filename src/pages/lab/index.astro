@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SectionIntro from "@/components/SectionIntro.astro";
+import CollectionCard from "@/components/CollectionCard.astro";
+
+const documents = (await getCollection("labs", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.experiment.localeCompare(b.data.experiment) || a.data.order - b.data.order);
+const groups = Map.groupBy(documents, entry => entry.data.experiment);
+---
+
+<Layout title="Lab | Wynn" description="작은 기술 실험과 그 과정을 여러 문서로 기록합니다.">
+  <Header />
+  <main id="main-content" class="app-layout">
+    <SectionIntro eyebrow="Experiments & notes" title="Lab" description="프로젝트보다 작은 범위의 기술 가설을 빠르게 시험합니다. 하나의 실험은 설정, 구현, 결과처럼 여러 문서로 이어질 수 있습니다." />
+    <section class="space-y-12 py-10 sm:py-14">
+      {groups.size > 0 ? Array.from(groups).map(([experiment, entries]) => (
+        <div>
+          <div class="mb-5 flex items-end justify-between gap-4">
+            <h2 class="text-2xl font-bold">{experiment}</h2>
+            <span class="text-muted-foreground text-sm">{entries.length} documents</span>
+          </div>
+          <ol class="grid gap-5 sm:grid-cols-2">
+            {entries.map(({ id, data }) => (
+              <li>
+                <CollectionCard href={`/lab/${id}/`} title={data.title} description={data.description} eyebrow={`Experiment ${String(data.order).padStart(2, "0")}`} tags={data.tags} />
+              </li>
+            ))}
+          </ol>
+        </div>
+      )) : (
+        <div class="border-border bg-surface rounded-2xl border p-8 sm:p-12">
+          <p class="text-accent text-sm font-bold">READY TO TEST</p>
+          <h2 class="mt-3 text-2xl font-bold">첫 번째 실험을 기다리고 있습니다.</h2>
+          <p class="text-muted-foreground mt-3 max-w-xl leading-7">작은 가설부터 환경 설정, 코드, 결과와 회고까지 문서 단위로 연결해 기록합니다.</p>
+        </div>
+      )}
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,29 @@
+---
+type Props = {
+  href: string;
+  title: string;
+  description: string;
+  eyebrow?: string;
+  meta?: string;
+  tags?: string[];
+};
+
+const { href, title, description, eyebrow, meta, tags = [] } = Astro.props;
+---
+
+<a href={href} class="group border-border bg-surface hover:border-accent/50 hover:shadow-accent/5 flex h-full flex-col rounded-2xl border p-6 transition duration-200 hover:-translate-y-1 hover:shadow-xl">
+  <div class="text-muted-foreground flex items-center justify-between gap-4 text-xs font-semibold tracking-[0.12em] uppercase">
+    <span>{eyebrow}</span>
+    <span>{meta}</span>
+  </div>
+  <h2 class="group-hover:text-accent mt-6 text-xl font-bold tracking-tight transition-colors">{title}</h2>
+  <p class="text-muted-foreground mt-3 grow text-sm leading-6">{description}</p>
+  {tags.length > 0 && (
+    <ul class="mt-6 flex flex-wrap gap-2" aria-label="기술 태그">
+      {tags.map(tag => <li class="bg-surface-strong text-muted-foreground rounded-full px-3 py-1 text-xs font-medium">{tag}</li>)}
+    </ul>
+  )}
+  <span class="text-accent mt-6 text-sm font-bold" aria-hidden="true">
+    자세히 보기 <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+  </span>
+</a>
