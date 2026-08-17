@@ -6,6 +6,7 @@ export default {
     projects: "Projects",
     lab: "Lab",
     scraps: "Scraps",
+    tools: "Tools",
     posts: "Posts",
     tags: "Tags",
     about: "About",

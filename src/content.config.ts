@@ -79,4 +79,20 @@ const scraps = defineCollection({
   }),
 });
 
-export const collections = { posts, pages, projects, labs, scraps };
+const tools = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/tools" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDatetime: z.date(),
+    modDatetime: z.date().optional().nullable(),
+    kind: z.enum(["app", "service", "feature", "workflow"]).default("app"),
+    bestFor: z.string(),
+    tags: z.array(z.string()).default([]),
+    favorite: z.boolean().default(false),
+    draft: z.boolean().default(false),
+    officialURL: z.url().optional(),
+  }),
+});
+
+export const collections = { posts, pages, projects, labs, scraps, tools };

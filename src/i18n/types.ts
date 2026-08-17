@@ -4,6 +4,7 @@ export interface UIStrings {
     projects: string;
     lab: string;
     scraps: string;
+    tools: string;
     posts: string;
     tags: string;
     about: string;

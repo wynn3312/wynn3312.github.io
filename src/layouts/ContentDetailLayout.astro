@@ -16,9 +16,10 @@ type Props = {
   sourceURL?: string;
   repositoryURL?: string;
   demoURL?: string;
+  officialURL?: string;
 };
 
-const { section, sectionHref, title, description, pubDatetime, modDatetime, eyebrow, tags = [], sourceName, sourceURL, repositoryURL, demoURL } = Astro.props;
+const { section, sectionHref, title, description, pubDatetime, modDatetime, eyebrow, tags = [], sourceName, sourceURL, repositoryURL, demoURL, officialURL } = Astro.props;
 const date = new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(modDatetime ?? pubDatetime);
 ---
 
@@ -36,6 +37,7 @@ const date = new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", 
           {sourceName && sourceURL && <a class="hover:text-accent underline underline-offset-4" href={sourceURL} target="_blank" rel="noreferrer">원문: {sourceName}</a>}
           {repositoryURL && <a class="hover:text-accent underline underline-offset-4" href={repositoryURL} target="_blank" rel="noreferrer">Repository</a>}
           {demoURL && <a class="hover:text-accent underline underline-offset-4" href={demoURL} target="_blank" rel="noreferrer">Live</a>}
+          {officialURL && <a class="hover:text-accent underline underline-offset-4" href={officialURL} target="_blank" rel="noreferrer">공식 사이트</a>}
         </div>
         {tags.length > 0 && (
           <ul class="mt-5 flex flex-wrap gap-2">
