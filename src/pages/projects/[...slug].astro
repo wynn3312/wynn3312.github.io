@@ -12,6 +12,6 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<ContentDetailLayout section="Projects" sectionHref="/projects/" title={entry.data.title} description={entry.data.description} pubDatetime={entry.data.pubDatetime} modDatetime={entry.data.modDatetime} eyebrow={entry.data.role} tags={entry.data.tags} repositoryURL={entry.data.repositoryURL} demoURL={entry.data.demoURL}>
+<ContentDetailLayout section="Portfolios" sectionHref="/projects/" title={entry.data.title} description={entry.data.description} pubDatetime={entry.data.pubDatetime} modDatetime={entry.data.modDatetime} eyebrow={entry.data.role} tags={entry.data.tags} repositoryURL={entry.data.repositoryURL} demoURL={entry.data.demoURL}>
   <Content />
 </ContentDetailLayout>

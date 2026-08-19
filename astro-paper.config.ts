@@ -3,8 +3,8 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://wynn3312.github.io/",
-    title: "김경수 | Game & AI Developer",
-    description: "게임 개발과 AI 프로젝트의 설계, 구현, 시행착오를 기록합니다.",
+    title: "김경수 | Game Systems Designer",
+    description: "게임 시스템과 콘텐츠 기획 경험, LLM과 자동화에 관한 실험과 기록을 공유합니다.",
     author: "김경수",
     profile: "https://github.com/wynn3312",
     ogImage: "default-og.jpg",

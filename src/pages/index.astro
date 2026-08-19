@@ -16,8 +16,8 @@ const sections = [
   {
     href: "/projects/",
     number: "01",
-    title: "Projects",
-    description: "완성된 결과보다 맡았던 역할과 구현 기능, 선택의 근거를 중심으로 정리합니다.",
+    title: "Portfolio",
+    description: "실무에서 운영한 게임과 프로젝트별로 직접 담당한 기능, 해결한 문제와 기여 내용을 중심으로 정리합니다.",
     count: projects.length,
     unit: "projects",
   },
@@ -25,7 +25,7 @@ const sections = [
     href: "/lab/",
     number: "02",
     title: "Lab",
-    description: "작은 기술 가설을 빠르게 검증하고 설정부터 결과까지 여러 문서로 연결합니다.",
+    description: "관심 있는 작업과 실험을 먼저 기록하고, 충분히 발전한 결과는 Portfolio로 이관합니다.",
     count: new Set(labs.map(({ data }) => data.experiment)).size,
     unit: "experiments",
   },
@@ -54,19 +54,19 @@ const sections = [
     <section class="grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1.35fr_0.65fr] lg:py-32">
       <div>
         <p class="text-accent mb-5 text-sm font-bold tracking-[0.16em] uppercase">
-          Game & AI Developer
+          Game Systems Designer
         </p>
         <h1 class="max-w-3xl text-5xl leading-[1.04] font-bold tracking-[-0.055em] sm:text-7xl">
           만들고, 검증하고,<br />
           <span class="text-muted-foreground">과정을 기록합니다.</span>
         </h1>
         <p class="text-muted-foreground mt-7 max-w-2xl text-base leading-8 sm:text-lg">
-          게임 개발 경험을 바탕으로 AI·추천 시스템·에이전트 기반 서비스를 만드는 김경수입니다.
-          결과뿐 아니라 문제를 정의하고 해결해 나간 맥락을 남깁니다.
+          게임 시스템과 콘텐츠를 기획하고 운영해 온 김경수입니다.
+          현재는 LLM과 자동화를 업무와 프로젝트에 적용해 보며 여러 가능성을 탐색하고 있습니다.
         </p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href="/projects/" class="bg-accent text-accent-foreground rounded-full px-5 py-3 text-sm font-bold transition-transform hover:-translate-y-0.5">
-            프로젝트 보기 →
+            포트폴리오 보기 →
           </a>
           <a href="https://github.com/wynn3312" target="_blank" rel="noreferrer" class="border-border bg-surface hover:border-accent/50 rounded-full border px-5 py-3 text-sm font-bold transition-colors">
             GitHub
@@ -83,8 +83,8 @@ const sections = [
             <p class="text-muted-foreground mt-1 text-sm">도구 사용과 지식 구조화</p>
           </li>
           <li class="border-border border-b pb-5">
-            <span class="text-sm font-bold">Recommendation</span>
-            <p class="text-muted-foreground mt-1 text-sm">데이터 전처리와 개인화</p>
+            <span class="text-sm font-bold">Automation</span>
+            <p class="text-muted-foreground mt-1 text-sm">반복 업무와 워크플로 개선</p>
           </li>
           <li>
             <span class="text-sm font-bold">Interactive Systems</span>

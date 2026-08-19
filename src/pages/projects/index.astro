@@ -11,24 +11,24 @@ const projects = (await getCollection("projects", ({ data }) => !data.draft))
 const statusLabel = { completed: "완료", "in-progress": "진행 중", paused: "보류" };
 ---
 
-<Layout title="Projects | Wynn" description="참여한 프로젝트와 담당 기능, 문제 해결 과정을 정리합니다.">
+<Layout title="Portfolio | Wynn" description="실무 프로젝트에서 직접 담당한 기능과 기여, 문제 해결 과정을 정리합니다.">
   <Header />
   <main id="main-content" class="app-layout">
-    <SectionIntro eyebrow="Selected work" title="Projects" description="진행했던 프로젝트에서 어떤 문제를 맡았고, 어떤 기능을 구현했으며, 무엇을 배웠는지 기록합니다." />
+    <SectionIntro eyebrow="Selected work" title="Portfolio" description="참여한 게임과 프로젝트를 소개하고, 그 안에서 직접 담당한 기능과 해결한 문제, 기여한 결과를 중심으로 기록합니다." />
     <section class="py-10 sm:py-14">
       {projects.length > 0 ? (
         <ul class="grid gap-5 sm:grid-cols-2">
           {projects.map(({ id, data }) => (
             <li>
-              <CollectionCard href={`/projects/${id}/`} title={data.title} description={data.description} eyebrow={data.role ?? "Project"} meta={statusLabel[data.status]} tags={data.tags} />
+              <CollectionCard href={`/projects/${id}/`} title={data.title} description={data.description} eyebrow={data.role ?? "Portfolio"} meta={statusLabel[data.status]} tags={data.tags} />
             </li>
           ))}
         </ul>
       ) : (
         <div class="border-border bg-surface rounded-2xl border p-8 sm:p-12">
           <p class="text-accent text-sm font-bold">COMING SOON</p>
-          <h2 class="mt-3 text-2xl font-bold">프로젝트 기록을 준비하고 있습니다.</h2>
-          <p class="text-muted-foreground mt-3 max-w-xl leading-7">프로젝트 개요, 담당 기능, 기술적 의사결정과 결과를 중심으로 하나씩 정리할 예정입니다.</p>
+          <h2 class="mt-3 text-2xl font-bold">포트폴리오를 준비하고 있습니다.</h2>
+          <p class="text-muted-foreground mt-3 max-w-xl leading-7">참여한 게임과 프로젝트의 배경, 직접 담당한 기능, 문제 해결 과정과 기여 결과를 중심으로 하나씩 정리할 예정입니다.</p>
         </div>
       )}
     </section>
